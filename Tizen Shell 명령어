@@ -1,0 +1,75 @@
+pkgcmd -l
+
+
+For web applications (widgets:
+sdb push app.wgt /tmp/Application.wgt
+sdb shell wrt-installer -i /tmp/Application.wgt
+
+For widgets using Command Line Interface tools web-install::
+web-install -w Application.wgt -i application_uri_id.org
+
+or using webtizen:
+webtizen install -w Application.wgt -i application_uri_id.org
+
+For native packages:
+sdb push your.tpk /opt/apps/PKGS/Application.tpk
+sdb shell pkgcmd -q -i -t tpk -p /opt/apps/PKGS/Application.tpk
+
+For native using Command Line Interface tools native-install:
+native-install -p your.tpk
+
+using sdb:
+sdb install /home/user/your.tpk 
+
+
+rpm -qa | grep i686
+[root@bt-rhel6-1 ~]# rpm -qa | grep x86_64 | wc -l
+
+rpm -Uvh --force --nodeps *.rpm
+
+
+/dev/ttyUSB0 관련 명령어
+lsusb
+screen /dev/ttyUSB0
+minicom
+
+
+
+libwidget_service-1.2.0-1.armv7l.rpm 설치
+#rpm --force -Uvh --nodeps libwidget_service-1.2.0-1.armv7l.rpm
+org.tizen.widget-viewer-demo-0.0.1-1.armv7l.rpm 설치
+#rpm --force -Uvh --nodeps org.tizen.widget-viewer-demo-0.0.1-1.armv7l.rpm
+#tpk-backend -y org.tizen.widget-viewer-demo --preload
+org.tizen.fridge-0.0.1-1.armv7l.rpm 설치
+#rpm --force -Uvh --nodeps org.tizen.fridge-0.0.1-1.armv7l.rpm
+#tpk-backend -y org.tizen.fridge --preload
+widget-viewer-demo 실행시켜서 preview image 눌렀을 때 위젯이 뜨는지 확인
+sqlite3 /opt/dbsapce/.widget.db 에서 db에 제대로 저장이 되었는지 확인
+dlogutil widget-viewer-demo로 사이즈가 제대로 들어왔는지 확인
+위젯의 size type 지정은 기존과 같이 xml의 support-size 부분에 해주시면 됩니다.
+현재 widget size는 다음과 같습니다.
+31x31=152x126
+33x31=504x126
+33x33=504x426
+33x36=504x876
+36x33=1032x426
+36x36=1032x876
+
+
+현상: View inside, Tunein, shoppinglist에서 화면이 동그라미 로딩 화면 유지됨.
+       위해식품, 웨더는 정상
+web-database은 3.0 빌드시 shpd 및 추가 모듈들이 빌드가 필요한 부분으로 바로 진행이 어렵습니다.
+disable하고 해당 원인만 패치하여 화면을 보고자 합니다.
+ 
+1. Login: root/tizen
+2. wgt 파일 설치
+   1) USB에서 /tmp로 파일 복사
+   2) chown owner /tmp/해당 파일.wgt
+   3) su - owner
+   4) pkgcmd -iqt wgt -p  /tmp/해당 파일.wgt
+   5) launch_app 프로그램이름.
+
+
+
+
+
